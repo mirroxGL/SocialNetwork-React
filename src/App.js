@@ -5,9 +5,11 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
 import { Router, Routes, BrowserRouter, Route } from 'react-router-dom';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 
 const App = (props) => {
+  let state = props.store.getState()
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -15,15 +17,11 @@ const App = (props) => {
         <Navbar />
         <div className='app-content-wrapper'>
           <Routes>
-            <Route path='/profile' element={<Profile posts={props.state.profile.postsData}
-              profileData={props.state.profile.profileData}
-              dispatch={props.dispatch}
-              newPostText={props.state.profile.newPostText} />} />
-
-            <Route path='/dialogs' element={<Dialogs dialogs={props.state.dialogs.dialogsData}
-              messages={props.state.dialogs.messagesData}
-              dispatch={props.dispatch}
-              newMessageText={props.state.dialogs.newMessageText} />} />
+            <Route path='/profile' element={<ProfileContainer store={props.store} />} />
+            <Route path='/dialogs' element={<Dialogs dialogs={state.dialogs.dialogsData}
+              messages={state.dialogs.messagesData}
+              dispatch={props.store.dispatch}
+              newMessageText={state.dialogs.newMessageText} />} />
           </Routes>
         </div>
       </div>

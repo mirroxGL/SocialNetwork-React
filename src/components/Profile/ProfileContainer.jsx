@@ -1,11 +1,12 @@
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
+import Profile from "./Profile";
 import React from "react"
 import { addPostActionCreator } from "../../redux/profile-reducer";
 import { updateNewPostTextActionCreator } from "../../redux/profile-reducer";
 
 
 const ProfileContainer = (props) => {
-   debugger
+   let state = props.store.getState()
    let addPost = () => {
       props.store.dispatch(addPostActionCreator())
    }
@@ -14,8 +15,7 @@ const ProfileContainer = (props) => {
       props.store.dispatch(action)
    }
    return (
-      <ProfileInfo hey={1} profileData={props.store.getState().profile.ProfileData} updateNewPostText={onPostChange} addPost={addPost} posts={props.store.getState().profile.postsData} newPostText={props.store.getState().profile.newPostText} />
-
+      <Profile updateNewPostText={onPostChange} addPost={addPost} newPostText={state.profile.newPostText} profileData={state.profile.profileData} posts={state.profile.postsData} />
    )
 }
 

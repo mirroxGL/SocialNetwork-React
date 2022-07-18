@@ -6,15 +6,14 @@ import { addPostActionCreator, updateNewPostTextActionCreator } from "../../redu
 
 
 
-const Content = (props) => {
+const Profile = (props) => {
 
-   let addPost = () => {
-      props.dispatch(addPostActionCreator())
+   let onAddPost = () => {
+      props.addPost()
    }
    let onPostChange = (e) => {
       let text = e.target.value
-      let action = updateNewPostTextActionCreator(text);
-      props.dispatch(action);
+      props.updateNewPostText(text)
    }
 
 
@@ -22,13 +21,13 @@ const Content = (props) => {
 
    return (
       <div>
-         <ProfileInfo profileData={props.profileData} updateNewPostText={onPostChange} addPost={addPost} posts={props.posts} newPostText={props.newPostText} />
+         <ProfileInfo profileData={props.profileData} />
          <div className={p.content_posts}>
             <h2 className={p.myPosts}>My posts</h2>
             <form className={p.addPostForm}>
                <textarea className={p.addPostInput} value={props.newPostText} onChange={onPostChange}></textarea>
                <div>
-                  <a onClick={addPost} className={p.addPostBtn}>Post</a>
+                  <a onClick={onAddPost} className={p.addPostBtn}>Post</a>
                </div>
             </form>
             <br />
@@ -38,4 +37,4 @@ const Content = (props) => {
    )
 }
 
-export default Content
+export default Profile
