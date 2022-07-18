@@ -1,0 +1,24 @@
+import p from "./ProfileInfo.module.css"
+
+const ProfileInfo = (props) => {
+   let profileData = props.profileData
+
+   return (
+      <div>
+         <div className={p.profile_banner__img}><img src="https://i.pinimg.com/originals/7a/81/24/7a81240359e212d40a665222ff3d13aa.jpg" /></div>
+         <div className={p.profile}>
+            <div className={p.profile__img}><img src="https://images.assetsdelivery.com/compings_v2/triken/triken1608/triken160800029.jpg" alt="" /></div>
+            <div className={p.profile_info}>
+               <div className={p.profile_info__name}>{profileData[0].name}</div>
+               <div className={p.profile_info__description}>
+                  <p>Date of Birth: {profileData[1].birthday}</p>
+                  <p>City: {profileData[2].city}</p>
+                  <p>Education: {profileData[3].education}</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   )
+}
+
+export default ProfileInfo

@@ -1,0 +1,71 @@
+body {
+   font-family: 'Josefin Sans', sans-serif;
+}
+
+.addPostBtn {
+   cursor: pointer;
+   background-color: rgb(79, 249, 238);
+   box-shadow: 2px 2px 5px black;
+}
+
+.addPostInput {
+   width: 600px;
+   height: 100px;
+}
+
+
+/* CSS */
+.addPostBtn {
+   cursor: pointer;
+   appearance: none;
+   background-color: rgb(32, 40, 51);
+   border: 2px solid rgb(32, 40, 51);
+   border-radius: 15px;
+   box-sizing: border-box;
+   color: #FFFFFF;
+   cursor: pointer;
+   display: inline-block;
+   font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+   font-size: 16px;
+   font-weight: 600;
+   line-height: normal;
+   margin-top: 5px;
+   outline: none;
+   float: right;
+   clear: right;
+   padding: 5px 15px;
+   text-align: right;
+   text-decoration: none;
+   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+   user-select: none;
+   -webkit-user-select: none;
+   touch-action: manipulation;
+   will-change: transform;
+}
+
+.addPostBtn:disabled {
+   pointer-events: none;
+}
+
+.addPostBtn:hover {
+   box-shadow: rgba(0, 0, 0, 0.25) 0 5px 10px;
+   transform: translateY(-1px);
+}
+
+.addPostBtn:active {
+   box-shadow: none;
+   transform: translateY(0);
+}
+
+
+.myPosts {
+   margin-top: 60px;
+   text-align: center;
+}
+
+.addPostForm {
+   display: block;
+   margin: 0 auto;
+   width: 600px;
+
+}
