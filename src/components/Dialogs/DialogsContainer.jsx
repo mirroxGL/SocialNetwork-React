@@ -5,41 +5,24 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import { sendMessageActionCreator } from "../../redux/dialogs-reducer";
 import { updateNewMessageTextActionCreator } from "../../redux/dialogs-reducer";
+import Dialogs from "./Dialogs";
 
 
-const Dialogs = (props) => {
+const DialogsContainer = (props) => {
 
-   let dialogsElements = props.dialogs.map((dialog, i) => <DialogItem key={i} name={dialog.name} id={dialog.id} />)
-   let messagesElements = props.messages.map((message, i) => <Message key={i} message={message.message} />)
-
-
+   let state = props.store.getState()
    let sendMessage = () => {
-      props.dispatch(sendMessageActionCreator())
+      props.store.dispatch(sendMessageActionCreator())
 
    }
-   let onMessageChange = (e) => {
-      let message = e.target.value
-      props.dispatch(updateNewMessageTextActionCreator(message))
+   let onMessageChange = (message) => {
+      let action = updateNewMessageTextActionCreator(message)
+      props.store.dispatch(action)
    }
 
    return (
-      <div>
-         <div className={d.dialogs}>
-            <div className={d.dialogsItems}>
-               {dialogsElements}
-            </div>
-            <div className={d.messages}>
-               {messagesElements}
-            </div>
-         </div>
-         <form className={d.sendMessageForm}>
-            <textarea onChange={onMessageChange} value={props.newMessageText} className={d.textInput} ></textarea>
-            <div><a onClick={sendMessage} className={d.sendMessageBtn}>Send</a></div>
-         </form>
-
-
-      </div>
+      <Dialogs sendMessage={sendMessage} onMessageChange={onMessageChange} dialogs={state.dialogs.dialogsData} messages={state.dialogs.messagesData} newMessageText={state.dialogs.newMessageText} />
    )
 }
 
-export default Dialogs
+export default DialogsContainer

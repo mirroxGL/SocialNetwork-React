@@ -14,12 +14,12 @@ const Dialogs = (props) => {
 
 
    let sendMessage = () => {
-      props.dispatch(sendMessageActionCreator())
+      props.sendMessage()
 
    }
    let onMessageChange = (e) => {
       let message = e.target.value
-      props.dispatch(updateNewMessageTextActionCreator(message))
+      props.onMessageChange(message)
    }
 
    return (

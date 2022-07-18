@@ -6,6 +6,7 @@ import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
 import { Router, Routes, BrowserRouter, Route } from 'react-router-dom';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
 const App = (props) => {
@@ -18,10 +19,7 @@ const App = (props) => {
         <div className='app-content-wrapper'>
           <Routes>
             <Route path='/profile' element={<ProfileContainer store={props.store} />} />
-            <Route path='/dialogs' element={<Dialogs dialogs={state.dialogs.dialogsData}
-              messages={state.dialogs.messagesData}
-              dispatch={props.store.dispatch}
-              newMessageText={state.dialogs.newMessageText} />} />
+            <Route path='/dialogs' element={<DialogsContainer store={props.store} />} />
           </Routes>
         </div>
       </div>

@@ -15,10 +15,7 @@ const Profile = (props) => {
       let text = e.target.value
       props.updateNewPostText(text)
    }
-
-
    let postsElements = props.posts.map((post, i) => <Post key={i} message={post.message} />)
-
    return (
       <div>
          <ProfileInfo profileData={props.profileData} />
