@@ -1,0 +1,109 @@
+.userItem {
+   margin: 30px;
+   width: 600px;
+
+}
+
+.userItem_block {
+   border: solid 1px rgb(58, 71, 90);
+   border-radius: 10px;
+   box-shadow: 1px 1px 2px rgb(58, 71, 90);
+   display: flex;
+
+}
+
+.userItem_info {
+   width: 100%;
+   margin-top: 10px;
+   margin-left: 10px;
+   display: flex;
+   justify-content: space-between;
+}
+
+.userItem_left {}
+
+.userItem_right {
+   margin-right: 20px;
+}
+
+.followBtn {
+   margin-top: 5px;
+}
+
+
+.userItem_avatarImg {
+   width: 80px;
+   margin: 10px;
+}
+
+.userItem_name {
+   font-size: 22px;
+   margin-bottom: 15px;
+}
+
+.userItem_country {
+   font-size: 22px;
+   margin-bottom: 5px;
+}
+
+.userItem_city {
+   display: flex;
+   justify-content: right;
+}
+
+.followBtn {
+   appearance: none;
+   background-color: rgb(32, 40, 51);
+   border: 2px solid rgb(32, 40, 51);
+   border-radius: 15px;
+   box-sizing: border-box;
+   color: #FFFFFF;
+   cursor: pointer;
+   display: inline-block;
+   font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+   font-size: 15px;
+   font-weight: 600;
+   line-height: normal;
+   margin-top: 5px;
+   outline: none;
+   clear: right;
+   padding: 4px 8px;
+   text-align: right;
+   text-decoration: none;
+   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+   user-select: none;
+   -webkit-user-select: none;
+   touch-action: manipulation;
+   will-change: transform;
+}
+
+.followBtn:disabled {
+   pointer-events: none;
+}
+
+.followBtn:hover {
+   box-shadow: rgba(0, 0, 0, 0.25) 0 5px 10px;
+   transform: translateY(-1px);
+}
+
+.followBtn:active {
+   box-shadow: none;
+   transform: translateY(0);
+}
+
+.selectedPage {
+   font-weight: 700;
+   color: black;
+}
+
+.pagination {
+   width: 100px;
+   height: 100px;
+}
+
+.paginationNumber {
+   cursor: pointer;
+   padding: 5px 5px;
+   border: 1px solid;
+   margin-right: 3px;
+}
