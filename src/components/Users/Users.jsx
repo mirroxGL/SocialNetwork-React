@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import s from "./Users.module.css"
 
 
@@ -23,7 +24,9 @@ let Users = (props) => {
             <div className={s.userItem}>
                <div className={s.userItem_block}>
                   <div className={s.userItem_avatar}>
-                     <img className={s.userItem_avatarImg} src={u.photos.small != null ? u.photos.small : "https://cdn-icons-png.flaticon.com/512/146/146035.png"} alt="" />
+                     <NavLink to={"/profile/" + u.id}>
+                        <img className={s.userItem_avatarImg} src={u.photos.small != null ? u.photos.small : "https://cdn-icons-png.flaticon.com/512/146/146035.png"} alt="" />
+                     </NavLink>
                   </div>
                   <div className={s.userItem_info}>
                      <div className={s.userItem_left}>

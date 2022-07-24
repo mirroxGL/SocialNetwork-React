@@ -1,6 +1,7 @@
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
 import Profile from "./Profile";
 import React from "react"
+import MyPosts from "./Post/Post";
 import { addPostActionCreator } from "../../redux/profile-reducer";
 import { updateNewPostTextActionCreator } from "../../redux/profile-reducer";
 import StoreContext from "../../StoreContext";
