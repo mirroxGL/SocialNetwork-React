@@ -1,37 +1,30 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { followAC, unfollowAC, setUsersAC, setCurrentPageAC, setTotalUsersCountAC, toggleIsFetchingAC } from "../../redux/users-reducer";
+import { setCurrentPageAC, requestUsersThunkCreator, unfollowThunkCreator, followThunkCreator } from "../../redux/users-reducer";
 import Users from "./Users";
-import axios from "axios";
 import Preloader from "./../common/Preloader/Preloader"
+import withAuthRedirect from "../../HOC/withAuthRedirect";
+import { compose } from 'redux'
+import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../redux/users-selectors";
 
 
 
 export class UsersContainer extends React.Component {
 
    componentDidMount() {
-      this.props.toggleIsFetching(true)
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count${this.props.pageSize}`).then(response => {
-         this.props.setUsers(response.data.items)
-         this.props.setTotalUsersCount(response.data.totalCount)
-         this.props.toggleIsFetching(false)
-      })
+      this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+
 
    }
    onPageChanged = (pageNumber) => {
-      this.props.toggleIsFetching(true)
+      this.props.requestUsers(pageNumber, this.props.pageSize)
       this.props.setCurrentPage(pageNumber)
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count${this.props.pageSize}`).then(response => {
-         this.props.setUsers(response.data.items)
-         this.props.toggleIsFetching(false)
-      })
+
    }
 
 
 
    render() {
-
-
       return (<>
          {this.props.isFetching ? <Preloader /> : null}
          <Users onPageChanged={this.onPageChanged}
@@ -40,7 +33,11 @@ export class UsersContainer extends React.Component {
             totalUsersCount={this.props.totalUsersCount}
             users={this.props.users}
             unfollow={this.props.unfollow}
-            follow={this.props.follow} />
+            follow={this.props.follow}
+            toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+            followingInProgress={this.props.followingInProgress}
+            isAuth={this.props.isAuth}
+            setCurrentPage={this.props.setCurrentPage} />
 
       </>
       )
@@ -51,43 +48,28 @@ export class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
    return {
-      users: state.usersPage.users,
-      pageSize: state.usersPage.pageSize,
-      totalUsersCount: state.usersPage.totalUsersCount,
-      currentPage: state.usersPage.currentPage,
-      isFetching: state.usersPage.isFetching,
-
+      users: getUsers(state),
+      pageSize: getPageSize(state),
+      totalUsersCount: getTotalUsersCount(state),
+      currentPage: getCurrentPage(state),
+      isFetching: getIsFetching(state),
+      followingInProgress: getFollowingInProgress(state)
    }
 }
 
-// let mapDispatchToProps = (dispatch) => {
-//    return {
-//       follow: (usersId) => {
-//          dispatch(followAC(usersId))
-//       },
-//       unfollow: (usersId) => {
-//          dispatch(unfollowAC(usersId))
-//       },
-//       setUsers: (users) => {
-//          dispatch(setUsersAC(users))
-//       },
-//       setCurrentPage: (page) => {
-//          dispatch(setCurrentPageAC(page))
-//       },
-//       setTotalUsersCount: (usersCount) => {
-//          dispatch(setTotalUsersCountAC(usersCount))
-//       },
-//       toggleIsFetching: (isFetching) => {
-//          dispatch(toggleIsFetchingAC(isFetching))
-//       }
-//    }
-// }
 
-export default connect(mapStateToProps, {
-   follow: followAC,
-   unfollow: unfollowAC,
-   setUsers: setUsersAC,
-   setCurrentPage: setCurrentPageAC,
-   setTotalUsersCount: setTotalUsersCountAC,
-   toggleIsFetching: toggleIsFetchingAC
-})(UsersContainer)
+export default compose(
+   withAuthRedirect,
+   connect(mapStateToProps, {
+      unfollow: unfollowThunkCreator,
+      follow: followThunkCreator,
+      setCurrentPage: setCurrentPageAC,
+      requestUsers: requestUsersThunkCreator,
+
+   }),
+
+)(UsersContainer)
+
+
+
+

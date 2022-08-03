@@ -1,0 +1,70 @@
+.login_title {
+   margin-bottom: 20px;
+   font-size: 30px;
+   font-weight: 700;
+}
+
+.login_block {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   margin-top: 60px;
+}
+
+.inputArea {
+   width: 200px;
+   height: 20px;
+   margin-bottom: 5px;
+   border: 1px solid rgb(32, 40, 51);
+   border-radius: 5px;
+}
+
+.login_btn {
+   cursor: pointer;
+   appearance: none;
+   color: white;
+   background-color: rgb(32, 40, 51);
+   border: 2px solid rgb(32, 40, 51);
+   border-radius: 15px;
+   box-sizing: border-box;
+   cursor: pointer;
+   display: inline-block;
+   font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+   font-size: 13px;
+   font-weight: 700;
+   line-height: normal;
+   margin-top: 7px;
+   outline: none;
+   clear: right;
+   padding: 5px 15px;
+   text-align: right;
+   text-decoration: none;
+   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+   user-select: none;
+   -webkit-user-select: none;
+   touch-action: manipulation;
+   will-change: transform;
+}
+
+.login_btn:disabled {
+   pointer-events: none;
+}
+
+.login_btn:hover {
+   box-shadow: rgba(0, 0, 0, 0.25) 0 5px 10px;
+   transform: translateY(-1px);
+}
+
+.login_btn:active {
+   box-shadow: none;
+   transform: translateY(0);
+}
+
+.rememberMe_label {
+   display: inline-block;
+   position: relative;
+   top: -2px;
+   left: 2px;
+   font-weight: 600;
+}

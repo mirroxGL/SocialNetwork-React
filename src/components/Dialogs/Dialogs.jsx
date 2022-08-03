@@ -1,10 +1,29 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import d from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import { sendMessageActionCreator } from "../../redux/dialogs-reducer";
-import { updateNewMessageTextActionCreator } from "../../redux/dialogs-reducer";
+import { Navigate } from 'react-router-dom';
+import { Field, reduxForm } from "redux-form"
+import { Textarea } from "../common/FormsControls/FormsControls";
+import { required, maxLengthCreator } from "../../util/validators/validators";
+
+const maxLength50 = maxLengthCreator(50)
+const DialogsForm = (props) => {
+
+   return <div>
+      <form onSubmit={props.handleSubmit} className={d.sendMessageForm}>
+         <Field validate={[required, maxLength50]} placeholder="Your message..." name="message" component={Textarea} className={d.textInput} />
+         <div><button className={d.sendMessageBtn}>Send</button></div>
+      </form>
+   </div>
+}
+
+
+
+const DialogsReduxForm = reduxForm({
+   form: "dialogsForm"
+})(DialogsForm)
+
 
 
 const Dialogs = (props) => {
@@ -12,15 +31,18 @@ const Dialogs = (props) => {
    let dialogsElements = props.dialogs.map((dialog, i) => <DialogItem key={i} name={dialog.name} id={dialog.id} />)
    let messagesElements = props.messages.map((message, i) => <Message key={i} message={message.message} />)
 
-
-   let sendMessage = () => {
-      props.sendMessage()
+   let sendMessage = (message) => {
+      props.sendMessage(message)
 
    }
-   let onMessageChange = (e) => {
-      let message = e.target.value
-      props.onMessageChange(message)
+   const handleSubmit = (formData) => {
+      sendMessage(formData.message);
+
    }
+   if (!props.isAuth) {
+      return <Navigate to={"/login"} />
+   }
+
 
    return (
       <div>
@@ -32,14 +54,10 @@ const Dialogs = (props) => {
                {messagesElements}
             </div>
          </div>
-         <form className={d.sendMessageForm}>
-            <textarea onChange={onMessageChange} value={props.newMessageText} className={d.textInput} ></textarea>
-            <div><a onClick={sendMessage} className={d.sendMessageBtn}>Send</a></div>
-         </form>
-
-
+         <DialogsReduxForm onSubmit={handleSubmit} />
       </div>
    )
 }
 
 export default Dialogs
+

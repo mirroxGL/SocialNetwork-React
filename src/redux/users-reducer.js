@@ -1,9 +1,12 @@
+import { usersAPI } from "../api/api"
+
 const SET_USERS = "SET-USERS"
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
+const TOGGLE_FOLLOWING_IN_PROGRESS = "TOGGLE-FOLLOWING-IN-PROGRESS"
 
 
 let initialState = {
@@ -14,8 +17,11 @@ let initialState = {
    pageSize: 5,
    currentPage: 1,
    isFetching: true,
+   followingInProgress: []
 
 }
+
+// ===========================USER REDUCER========================== //
 
 const usersReducer = (state = initialState, action) => {
 
@@ -62,11 +68,25 @@ const usersReducer = (state = initialState, action) => {
          return {
             ...state, isFetching: action.isFetching
          }
+
+      }
+      case TOGGLE_FOLLOWING_IN_PROGRESS: {
+         return {
+            ...state, followingInProgress: action.isFetching
+               ? [...state.followingInProgress, action.userId]
+               : state.followingInProgress.filter(id => id != action.userId)
+         }
+
       }
       default:
          return state
    }
 }
+
+
+
+
+// ===========================ACTION CREATORS========================== //
 
 export const followAC = (userId) => ({
    type: FOLLOW,
@@ -95,6 +115,58 @@ export const toggleIsFetchingAC = (isFetching) => ({
    type: TOGGLE_IS_FETCHING,
    isFetching
 })
+export const toggleFollowingInProgress = (isFetching, userId) => ({
+   type: TOGGLE_FOLLOWING_IN_PROGRESS,
+   isFetching,
+   userId
+})
+
+
+
+
+
+// ===========================THUNK CREATORS========================== //
+
+export const requestUsersThunkCreator = (currentPage, pageSize) => {
+   return (dispatch) => {
+      dispatch(toggleIsFetchingAC(true))
+      usersAPI.getUsers(currentPage, pageSize).then(data => {
+         dispatch(toggleIsFetchingAC(false))
+         dispatch(setUsersAC(data.items))
+         dispatch(setTotalUsersCountAC(data.totalCount))
+
+      })
+   }
+}
+
+export const unfollowThunkCreator = (userId) => {
+   return (dispatch) => {
+      dispatch(toggleFollowingInProgress(true, userId.id))
+      usersAPI.unfollow(userId).then(data => {
+         if (data.resultCode == 0) {
+            dispatch(unfollowAC(userId.id))
+
+
+         }
+         dispatch(toggleFollowingInProgress(false, userId.id))
+      })
+   }
+}
+
+export const followThunkCreator = (userId) => {
+   return (dispatch) => {
+      dispatch(toggleFollowingInProgress(true, userId.id))
+      usersAPI.follow(userId).then(data => {
+         if (data.resultCode == 0) {
+            dispatch(followAC(userId.id))
+
+         }
+         dispatch(toggleFollowingInProgress(false, userId.id))
+      })
+   }
+}
+
+
 
 
 

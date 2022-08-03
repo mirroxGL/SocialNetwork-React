@@ -1,3 +1,7 @@
+.usersBlock {
+   margin-top: 30px;
+}
+
 .userItem {
    margin: 30px;
    width: 600px;
@@ -97,11 +101,13 @@
 }
 
 .pagination {
+
    width: 100px;
    height: 100px;
 }
 
 .paginationNumber {
+   border-radius: 5px;
    cursor: pointer;
    padding: 5px 5px;
    border: 1px solid;

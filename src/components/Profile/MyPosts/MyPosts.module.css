@@ -1,46 +1,20 @@
-.dialogs {
-   display: grid;
-   grid-template-columns: 2fr 10fr;
+.content_posts {}
+
+.addPostBtn {
+   cursor: pointer;
+   background-color: rgb(79, 249, 238);
+   box-shadow: 2px 2px 5px black;
 }
 
-.dialogsItems {}
-
-.dialog a {
-   text-decoration: none;
-   color: inherit;
-}
-
-.dialog {
-   margin: 20px;
-   margin-left: 50px;
-
-}
-
-.messages {}
-
-.message {
-   margin: 20px;
-   margin-left: 50px;
-}
-
-.message:first-child {
-   margin: 100px 20px 20px 50px;
-}
-
-.dialog:first-child {
-   margin: 100px 20px 20px 50px;
-}
-
-.textInput {
-   display: inline-block;
-   margin: 100px auto 0 auto;
+.addPostInput {
    width: 600px;
    height: 100px;
 }
 
-.sendMessageBtn {}
 
-.sendMessageBtn {
+/* CSS */
+.addPostBtn {
+   cursor: pointer;
    appearance: none;
    background-color: rgb(32, 40, 51);
    border: 2px solid rgb(32, 40, 51);
@@ -67,18 +41,32 @@
    will-change: transform;
 }
 
+.addPostBtn:disabled {
+   pointer-events: none;
+}
 
-.sendMessageBtn:hover {
+.addPostBtn:hover {
    box-shadow: rgba(0, 0, 0, 0.25) 0 5px 10px;
    transform: translateY(-1px);
 }
 
-.sendMessageBtn:active {
+.addPostBtn:active {
    box-shadow: none;
    transform: translateY(0);
 }
 
-.sendMessageForm {
+
+.myPostsTitle {
+   margin-top: 70px;
+   text-align: center;
+}
+
+.myPosts {
+   margin-left: 50px;
+}
+
+
+.addPostForm {
    display: block;
    margin: 0 auto;
    width: 600px;
@@ -86,7 +74,9 @@
 }
 
 
-.textInput {
+
+
+.addPostInput {
    font-family: inherit;
    width: 100%;
    font-size: 16px;
@@ -95,29 +85,30 @@
    transition: border-color 0.2s;
    box-sizing: border-box;
    width: 100%;
+   margin: 0 0 1em 0;
    border: 1px solid rgb(32, 40, 51);
    background: #eeeeee;
    resize: none;
    outline: none;
 }
 
-input[type="email"] {
+Z input[type="email"] {
    height: calc(3em + 2px);
 }
 
-.textInput::placeholder {
+.addPostInput::placeholder {
    color: rgb(32, 40, 51);
 
 }
 
-.textInput:placeholder-shown~.form-label {
+.addPostInput:placeholder-shown~.form-label {
    font-size: 16px;
    cursor: text;
    top: 20px;
 }
 
 label,
-.textInput:focus~.form-label {
+.addPostInput:focus~.form-label {
    position: absolute;
    top: 5px;
    left: 8px;
@@ -131,11 +122,11 @@ label,
    background-position: center;
 }
 
-.textInput:focus~.form-label {
+.addPostInput:focus~.form-label {
    color: rgb(32, 40, 51);
 }
 
-.textInput:focus {
+.addPostInput:focus {
    padding-bottom: 6px;
    border: 1px solid rgb(32, 40, 51);
 }
