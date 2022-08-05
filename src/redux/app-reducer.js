@@ -3,7 +3,7 @@ import { usersAPI, authMeAPI } from "../api/api"
 import { getAuthUserData, authMeThunkCreator } from './auth-reducer'
 
 
-const INITIALIZED_SECCESS = "INITIALIZED-SECCESS"
+const INITIALIZED_SECCESS = "app/INITIALIZED-SUCCESS"
 
 
 
@@ -47,26 +47,26 @@ export const initializeApp = () => (dispatch) => {
 
 }
 
-export const login = (email, password, rememberMe) => (dispatch) => {
-   return authMeAPI.login(email, password, rememberMe).then(data => {
-      if (data.resultCode === 0) {
-         dispatch(authMeThunkCreator())
-      }
-      else {
-         let message = data.messages.length > 0 ? data.messages[0] : "Some error"
-         let action = stopSubmit("login", { _error: message })
-         dispatch(action)
-      }
-   })
+export const login = (email, password, rememberMe) => async (dispatch) => {
+   let data = await authMeAPI.login(email, password, rememberMe)
+   if (data.resultCode === 0) {
+      dispatch(authMeThunkCreator())
+   }
+   else {
+      let message = data.messages.length > 0 ? data.messages[0] : "Some error"
+      let action = stopSubmit("login", { _error: message })
+      dispatch(action)
+   }
+
 }
 
-export const logout = () => (dispatch) => {
-   return authMeAPI.logout().then(data => {
-      if (data.resultCode === 0) {
-         dispatch(getAuthUserData(null, null, null, false))
+export const logout = () => async (dispatch) => {
+   let data = await authMeAPI.logout()
+   if (data.resultCode === 0) {
+      dispatch(getAuthUserData(null, null, null, false))
 
-      }
-   })
+   }
+
 }
 
 

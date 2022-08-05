@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { setCurrentPageAC, requestUsersThunkCreator, unfollowThunkCreator, followThunkCreator } from "../../redux/users-reducer";
+import { setCurrentPageAC, requestUsersThunkCreator, unfollowThunkCreator, followThunkCreator, setUsersAC } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "./../common/Preloader/Preloader"
 import withAuthRedirect from "../../HOC/withAuthRedirect";
@@ -37,7 +37,8 @@ export class UsersContainer extends React.Component {
             toggleFollowingInProgress={this.props.toggleFollowingInProgress}
             followingInProgress={this.props.followingInProgress}
             isAuth={this.props.isAuth}
-            setCurrentPage={this.props.setCurrentPage} />
+            setCurrentPage={this.props.setCurrentPage}
+            setUsers={this.props.setUsers} />
 
       </>
       )
@@ -65,6 +66,7 @@ export default compose(
       follow: followThunkCreator,
       setCurrentPage: setCurrentPageAC,
       requestUsers: requestUsersThunkCreator,
+      setUsers: setUsersAC,
 
    }),
 

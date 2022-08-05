@@ -10,10 +10,10 @@ import p from "./Login.module.css"
 
 
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error }) => {
    return (
       <div>
-         <form onSubmit={props.handleSubmit}>
+         <form onSubmit={handleSubmit}>
             <div>
                <Field className={p.inputArea} placeholder="Login" name="email" component={Input} validate={required} />
             </div>
@@ -23,7 +23,7 @@ const LoginForm = (props) => {
             <div>
                <Field name="rememberMe" type={"checkbox"} component={"input"} /><span className={p.rememberMe_label}>remember me</span>
             </div>
-            {props.error && <div className={s.formSummaryError} >{props.error}</div>}
+            {error && <div className={s.formSummaryError} >{error}</div>}
             <div>
                <button className={p.login_btn}>Login</button>
             </div>
