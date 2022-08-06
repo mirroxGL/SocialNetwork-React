@@ -40,15 +40,17 @@ const MyPosts = React.memo(props => {
    }
 
    return (
-      <div>
+
+      <div >
          <div className={p.content_posts}>
             <h2 className={p.myPostsTitle}>My posts</h2>
-            <MyPostsReduxForm onSubmit={handleSubmit} />
+            {props.isOwner && <MyPostsReduxForm onSubmit={handleSubmit} posts={props.posts} />}
+
             <br />
             <div className={p.myPosts}>{postsElements}</div>
 
          </div>
-      </div>
+      </div >
    )
 })
 

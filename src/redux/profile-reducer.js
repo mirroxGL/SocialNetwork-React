@@ -4,6 +4,7 @@ const ADD_POST = "profile/ADD-POST"
 const SET_USER_PROFILE = "profile/SET-USER-PROFILE"
 const SET_STATUS = "profile/SET-STATUS"
 const LIKE_POST = "profile/LIKE-POST"
+const SAVE_PHOTO_SUCCESS = "profile/SAVE-PHOTO-SUCCESS"
 
 let initialState = {
    profileData: [
@@ -44,6 +45,9 @@ const profileReducer = (state = initialState, action) => {
       case SET_STATUS: {
          return { ...state, status: action.status }
       }
+      case SAVE_PHOTO_SUCCESS: {
+         return { ...state, profile: { ...state.profile, photos: action.photos } }
+      }
       // case LIKE_POST: {
       //    let postLikesCount = state.postsData[postId - 1].likesCount
       //    return { ...state, postsData: [state.postsData[postId - 1].likesCount = postLikesCount + 1, ...state.postsData] }
@@ -65,6 +69,10 @@ const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = (text) => ({
    type: ADD_POST,
    text
+})
+export const savePhotoSuccess = (photos) => ({
+   type: SAVE_PHOTO_SUCCESS,
+   photos
 })
 
 export const setUserProfile = (profile) => ({
@@ -93,9 +101,18 @@ export const updateStatusThunkCreator = (status) => async (dispatch) => {
    if (data.resultCode === 0) {
       dispatch(setStatus(status))
    }
-
-
 }
+
+export const savePhoto = (file) => async (dispatch) => {
+   let data = await profileAPI.savePhoto(file)
+   if (data.resultCode === 0) {
+      dispatch(savePhotoSuccess(data.data.photos))
+   }
+}
+
+
+
+
 
 
 

@@ -8,7 +8,9 @@ let mapStateToProps = (state) => {
    return {
       profileData: state.profile.profileData,
       posts: state.profile.postsData
+
    }
+
 }
 
 let mapDispatchToProps = (dispatch) => {
@@ -18,9 +20,6 @@ let mapDispatchToProps = (dispatch) => {
          dispatch(reset('posts'))
 
       },
-      // likePost: (messageId) => {
-      //    dispatch(likePost(messageId))
-      // }
 
    }
 }

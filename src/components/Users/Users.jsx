@@ -14,7 +14,7 @@ let Users = (props) => {
    }
    return <div className={s.usersDiv}>
       <Paginator pageSize={props.pageSize} totalItemsCount={props.totalUsersCount} currentPage={props.currentPage} onPageChanged={props.onPageChanged} />
-      <User pageSize={props.pageSize} users={props.users} totalUsersCount={props.totalUsersCount} followingInProgress={props.followingInProgress} />
+      <User unfollow={props.unfollow} follow={props.follow} pageSize={props.pageSize} users={props.users} totalUsersCount={props.totalUsersCount} followingInProgress={props.followingInProgress} />
    </div >
 }
 
