@@ -7,7 +7,8 @@ import { reset } from 'redux-form';
 let mapStateToProps = (state) => {
    return {
       profileData: state.profile.profileData,
-      posts: state.profile.postsData
+      posts: state.profile.postsData,
+      profile: state.profile.profile,
 
    }
 

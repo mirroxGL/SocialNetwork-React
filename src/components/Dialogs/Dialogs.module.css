@@ -1,9 +1,21 @@
 .dialogs {
+   min-height: 400px;
    display: grid;
    grid-template-columns: 2fr 10fr;
+   margin-top: 20px;
+   width: 100%;
+   border: solid 1px rgb(58, 71, 90);
+   border-radius: 10px;
+   box-shadow: 1px 1px 2px rgb(58, 71, 90);
 }
 
-.dialogsItems {}
+.dialogsItems {
+   font-weight: 500;
+}
+
+.dialogsItems.selected {
+   font-weight: 700;
+}
 
 .dialog a {
    text-decoration: none;
@@ -19,16 +31,17 @@
 .messages {}
 
 .message {
+
    margin: 20px;
    margin-left: 50px;
 }
 
 .message:first-child {
-   margin: 100px 20px 20px 50px;
+   margin: 50px 20px 20px 50px;
 }
 
 .dialog:first-child {
-   margin: 100px 20px 20px 50px;
+   margin: 50px 20px 20px 50px;
 }
 
 .textInput {
@@ -42,11 +55,11 @@
 
 .sendMessageBtn {
    appearance: none;
-   background-color: rgb(32, 40, 51);
-   border: 2px solid rgb(32, 40, 51);
+   background-color: #ffffff;
+   border: 2px solid #bbbfc3;
    border-radius: 15px;
    box-sizing: border-box;
-   color: #FFFFFF;
+   color: #bbbfc3;
    cursor: pointer;
    display: inline-block;
    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -88,7 +101,6 @@
 
 .textInput {
    font-family: inherit;
-   width: 100%;
    font-size: 16px;
    padding: 7px 4px;
    background: transparent;
@@ -138,4 +150,29 @@ label,
 .textInput:focus {
    padding-bottom: 6px;
    border: 1px solid rgb(32, 40, 51);
+}
+
+.textInput {
+   margin-top: 200px;
+   display: block;
+   width: 600px;
+   resize: none;
+   overflow: hidden;
+   height: 100px;
+   padding: 6px 12px;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 1.5;
+   color: #212529;
+   background-color: #fff;
+   background-clip: padding-box;
+   border: 1px solid #bbbfc3;
+   border-radius: 4px;
+   margin-bottom: 20px;
+}
+
+.textInput::placeholder {
+
+   color: #ced4da;
+
 }

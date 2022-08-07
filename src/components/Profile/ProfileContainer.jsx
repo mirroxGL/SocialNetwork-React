@@ -6,6 +6,8 @@ import { setUserProfile, setProfileThunkCreator, getStatusThunkCreator, updateSt
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { compose } from 'redux'
+import { saveProfileThunkCreator } from '../../redux/profile-reducer'
+import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers'
 
 
 export function withRouter(Children) {
@@ -23,6 +25,7 @@ class ProfileContainer extends React.Component {
 
       if (!userId) {
          if (this.props.isAuth) {
+            console.log(this.props.authorizedUserId);
             userId = this.props.authorizedUserId
          }
       }
@@ -48,15 +51,18 @@ class ProfileContainer extends React.Component {
    render() {
       return (
          <Profile {...this.props}
+            profile={this.props.profile}
             status={this.props.status}
             updateStatus={this.props.updateStatus}
             isOwner={!this.props.match.params.userId}
-            savePhoto={this.props.savePhoto} />
+            savePhoto={this.props.savePhoto}
+            saveProfile={this.props.saveProfile} />
       )
    }
 }
 
 let mapStateToProps = (state) => ({
+   profile: state.profile.profile,
    status: state.profile.status,
    authorizedUserId: state.auth.userId,
    isAuth: state.auth.isAuth,
@@ -70,7 +76,8 @@ export default compose(
       setProfile: setProfileThunkCreator,
       getStatus: getStatusThunkCreator,
       updateStatus: updateStatusThunkCreator,
-      savePhoto: savePhoto
+      savePhoto: savePhoto,
+      saveProfile: saveProfileThunkCreator
    }),
    withRouter,
    withAuthRedirect)(ProfileContainer)

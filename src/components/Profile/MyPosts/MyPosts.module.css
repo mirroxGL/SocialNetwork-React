@@ -1,3 +1,7 @@
+*:text {
+   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+}
+
 .content_posts {}
 
 .addPostBtn {
@@ -66,10 +70,27 @@
 }
 
 
-.addPostForm {
+.addPostForm textarea {
    display: block;
    margin: 0 auto;
    width: 600px;
+   resize: none;
+   overflow: hidden;
+   height: 100px;
+   padding: 6px 12px;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 1.5;
+   color: #212529;
+   background-color: #fff;
+   background-clip: padding-box;
+   border: 1px solid #ced4da;
+   border-radius: 4px;
+}
+
+.addPostForm textarea::placeholder {
+
+   color: #ced4da;
 
 }
 
