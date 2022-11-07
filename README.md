@@ -1,3 +1,20 @@
+# General info
+
+The social network is made with React and Redux libraries, based on 
+a third-party user database and a server for sending API requests. I 
+implemented the ability to subscribe and unsubscribe from users, save 
+posts and messages in the local state, upload an avatar, change the 
+status and description of your own page, log into the system and visit 
+the profiles of other users.
+
+# Technologies
+
+*React/Redux
+
+*Axios
+
+*HTML/CSS
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
